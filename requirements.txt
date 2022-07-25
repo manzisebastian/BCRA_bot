@@ -1,0 +1,6 @@
+tweepy
+pandas==1.3.5
+requests==2.23.0
+python-dateutil==2.8.2
+DateTime==4.5
+python-time==0.3.0
