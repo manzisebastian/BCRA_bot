@@ -4,7 +4,6 @@ def tweet_info(_context):
     
     import pandas as pd
     import requests
-    import datetime
     from dateutil.relativedelta import relativedelta
     import tweepy
     import time
@@ -74,10 +73,6 @@ def tweet_info(_context):
     df_reservas = transform_df(url_reservas)
     date_reservas_last = df_reservas['date'].iloc[-1]
     value_reservas_last = df_reservas['value'].iloc[-1]
-    reservas_month_ago = date_reservas_last - relativedelta(months=1)
-    reservas_year_ago = date_reservas_last - relativedelta(years=1)
-    value_reservas_month_ago = df_reservas.loc[(df_reservas['date'] - reservas_month_ago).abs().idxmin(), 'value']
-    value_reservas_year_ago = df_reservas.loc[(df_reservas['date'] - reservas_year_ago).abs().idxmin(), 'value']
     value_reservas_prev = df_reservas['value'][len(df_reservas)-2]
     cond_2 = "aumentó" if value_reservas_last/value_reservas_prev - 1 > 0 else "disminuyó" 
 
