@@ -1,5 +1,5 @@
 # BCRA_bot
-Bot escrito en Python para Twitter, que actualiza diariamente las principales variables monetarias, publicadas por el Banco Central de la República Argentina (BCRA).
+Bot escrito en Python para Twitter que actualiza diariamente las principales variables monetarias, publicadas por el Banco Central de la República Argentina (BCRA).
 
 La información es extraída a las 18:30 hs. de cada día de semana (lunes a viernes) mediante un proceso de web scraping de la página oficial del Banco Central de la República Argentina (https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp).
 
