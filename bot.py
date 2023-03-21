@@ -319,16 +319,9 @@ def tweet_info(_context):
     "¡Nos vemos pronto!"
     )
 
-    # Feriados
+    # Feriados y fecha
 
     AR_holidays = holidays.AR()
-
-    AR_holidays[datetime.date(2022, 8, 15)] = AR_holidays.pop(datetime.date(2022, 8, 17))
-    AR_holidays[datetime.date(2022, 9, 2)] = 'Feriado ad-hoc decretado por el PEN.'
-    AR_holidays[datetime.date(2022, 10, 10)] = AR_holidays.pop(datetime.date(2022, 10, 12))
-    AR_holidays[datetime.date(2022, 10, 7)] = 'TURÍSTICO: Día del Respeto a la Diversidad Cultural [Respect for Cultural Diversity Day]'
-    AR_holidays[datetime.date(2022, 11, 21)] = 'TURÍSTICO: Día Nacional de la Soberanía [National Sovereignty Day]'
-    AR_holidays[datetime.date(2022, 12, 9)] = 'TURÍSTICO: La Inmaculada Concepción [Immaculate Conception]'
     
     today = date.today()
 
