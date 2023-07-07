@@ -23,7 +23,7 @@ def tweet_info(_context):
     header_BCRA = getenv("header")
 
     header = {"Authorization": header_BCRA}
-    
+
     # Inicialización del Client en Tweepy y autenticación
     
     tweepy_api = tweepy.Client(
@@ -212,6 +212,7 @@ def tweet_info(_context):
         value_depositos_a_plazo_week_ago = df.loc[(df['date'] - one_week_ago).abs().idxmin(), consultas[12]]
         value_prestamos_week_ago = df.loc[(df['date'] - one_week_ago).abs().idxmin(), consultas[13]]
 
+
     # Textos
 
     text_componentes_BM = (
@@ -231,7 +232,7 @@ def tweet_info(_context):
         f"Circulante monetario: {value_circulante/value_circulante_week_ago - 1:{'.2%' if value_circulante/value_circulante_week_ago - 1 < 0 else '+.2%'}}\n"
         f"Billetes y monedas: {value_billetes_y_monedas/value_billetes_y_monedas_week_ago - 1:{'.2%' if value_billetes_y_monedas/value_billetes_y_monedas_week_ago - 1 < 0 else '+.2%'}}\n"
         f"Efectivo en ent. fin.: {value_efectivo_en_entidades/value_efectivo_en_entidades_week_ago - 1:{'.2%' if value_efectivo_en_entidades/value_efectivo_en_entidades_week_ago - 1 < 0 else '+.2%'}}\n"
-        f"Depósitos en CC del BCRA: {value_depositos_CC_en_BCRA/value_depositos_CC_en_BCRA_week_ago - 1:{'.2%' if value_depositos_CC_en_BCRA/value_depositos_CC_en_BCRA_week_ago - 1 < 0 else '+.2%'}}\n"
+        f"Depósitos en CC del BCRA: {value_depositos_CC_en_BCRA/value_depositos_CC_en_BCRA_week_ago - 1:{'.2%' if value_depositos_CC_en_BCRA/value_depositos_CC_en_BCRA_week_ago - 1 < 0 else '+.2%'}}"
         )
   
     text_reservas = (
@@ -252,14 +253,14 @@ def tweet_info(_context):
     text_tc = (
     "-- Tipo de cambio --\n\n"
     f"US$ minorista: ${value_TC_min} por US$.\n"
-    f"US$ mayorista (Com. A 3500): ${value_TC_may} por US$.\n"
+    f"US$ mayorista (Com. A 3500): ${value_TC_may} por US$."
     )
 
     if pd.to_datetime(p_variables['Fecha'][1], dayfirst=True).weekday() == 4:
         text_semanal_tc = (
         "-- Análisis semanal: tipo de cambio --\n\n"
         f"Var. semanal US$ minorista: ${value_TC_min - value_TC_min_week_ago:.2f} por US$ ({value_TC_min/value_TC_min_week_ago - 1:{'.2%' if value_TC_min/value_TC_min_week_ago - 1 < 0 else '+.2%'}})\n"
-        f"Var. semanal US$ mayorista (Com. A 3500): ${value_TC_may - value_TC_may_week_ago:.2f} por US$ ({value_TC_may/value_TC_may_week_ago - 1:{'.2%' if value_TC_may/value_TC_may_week_ago - 1 < 0 else '+.2%'}})\n"
+        f"Var. semanal US$ mayorista (Com. A 3500): ${value_TC_may - value_TC_may_week_ago:.2f} por US$ ({value_TC_may/value_TC_may_week_ago - 1:{'.2%' if value_TC_may/value_TC_may_week_ago - 1 < 0 else '+.2%'}})"
         )
 
     text_tasas_BCRA = (
@@ -267,7 +268,7 @@ def tweet_info(_context):
     f"Tasa de política monetaria: TNA {value_tasa_PM_TNA}% - TEA {value_tasa_PM_TEA}%\n"
     "Tasas de operaciones de pase:\n"
     f"- Activa: TNA {value_tasa_REPO_activa}%\n"
-    f"- Pasiva: TNA {value_tasa_REPO_pasiva_TNA}% - TEA {value_tasa_REPO_pasiva_TEA}%\n"
+    f"- Pasiva: TNA {value_tasa_REPO_pasiva_TNA}% - TEA {value_tasa_REPO_pasiva_TEA}%"
     )
 
     text_tasas_depositos = (
@@ -335,35 +336,35 @@ def tweet_info(_context):
     # Call a Tweepy
 
     if today in AR_holidays:
-        tweepy_api.update_status(status=text_feriados)
+        tweepy_api.create_tweet(text=text_feriados)
     else:
-        tweepy_api.update_status(status=text_componentes_BM)
+        tweepy_api.create_tweet(text=text_componentes_BM)
         time.sleep(2)
         if pd.to_datetime(p_variables['Fecha'][17], dayfirst=True).weekday() == 4:
-            tweepy_api.update_status(status=text_semanal_componentes_BM)
+            tweepy_api.create_tweet(text=text_semanal_componentes_BM)
             time.sleep(2)
-        tweepy_api.update_status(status=text_reservas)
+        tweepy_api.create_tweet(text=text_reservas)
         time.sleep(2)
         if pd.to_datetime(p_variables['Fecha'][0], dayfirst=True).weekday() == 4:
-            tweepy_api.update_status(status=text_semanal_reservas)
+            tweepy_api.create_tweet(text=text_semanal_reservas)
             time.sleep(2)
-        tweepy_api.update_status(status=text_tc)
+        tweepy_api.create_tweet(text=text_tc)
         time.sleep(2)
         if pd.to_datetime(p_variables['Fecha'][1], dayfirst=True).weekday() == 4:
-            tweepy_api.update_status(status=text_semanal_tc)
+            tweepy_api.create_tweet(text=text_semanal_tc)
             time.sleep(2)
-        tweepy_api.update_status(status=text_tasas_BCRA)
+        tweepy_api.create_tweet(text=text_tasas_BCRA)
         time.sleep(2)
-        tweepy_api.update_status(status=text_tasas_depositos)
+        tweepy_api.create_tweet(text=text_tasas_depositos)
         time.sleep(2)
-        tweepy_api.update_status(status=text_leliq)
+        tweepy_api.create_tweet(text=text_leliq)
         time.sleep(2)
         if pd.to_datetime(p_variables['Fecha'][22], dayfirst=True).weekday() == 4:
-            tweepy_api.update_status(status=text_semanal_leliq)
+            tweepy_api.create_tweet(text=text_semanal_leliq)
             time.sleep(2)
-        tweepy_api.update_status(status=text_depositos)
+        tweepy_api.create_tweet(text=text_depositos)
         time.sleep(2)
         if pd.to_datetime(p_variables['Fecha'][23], dayfirst=True).weekday() == 4:
-            tweepy_api.update_status(status=text_semanal_depositos)
+            tweepy_api.create_tweet(text=text_semanal_depositos)
             time.sleep(2)
-        tweepy_api.update_status(status=text_otros_indicadores)
+        tweepy_api.create_tweet(text=text_otros_indicadores)
