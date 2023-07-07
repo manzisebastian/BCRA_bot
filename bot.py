@@ -19,13 +19,20 @@ def tweet_info(_context):
     consumer_secret = getenv("consumer_secret")
     access_token = getenv("access_token")
     access_token_secret = getenv("access_token_secret")
+    bearer_twitter = getenv("bearer_twitter")
     header_BCRA = getenv("header")
 
     header = {"Authorization": header_BCRA}
     
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    tweepy_api = tweepy.API(auth)
+    # Inicialización del Client en Tweepy y autenticación
+    
+    tweepy_api = tweepy.Client(
+        bearer_token = bearer_twitter,
+        consumer_key = consumer_key,
+        consumer_secret = consumer_secret,
+        access_token = access_token,
+        access_token_secret = access_token_secret
+    )
     
     # Web scraping: principales variables del BCRA
 
@@ -360,4 +367,3 @@ def tweet_info(_context):
             tweepy_api.update_status(status=text_semanal_depositos)
             time.sleep(2)
         tweepy_api.update_status(status=text_otros_indicadores)
-        time.sleep(2)
