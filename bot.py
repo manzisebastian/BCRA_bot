@@ -32,7 +32,7 @@ def tweet_info(_context):
     
     today = date.today()
 
-    today_date = datetime.today().date() - timedelta(days=1)
+    today_date = datetime.today().date()
     today_date = str(today_date)
     year_date = today_date - timedelta(days=365)
     year_date = str(year_date)
