@@ -5,8 +5,10 @@ def tweet_info(_context):
     import pandas as pd
     import requests
     from datetime import datetime, timedelta
-    import matplotlib.pyplot as plt
-    import numpy as np
+    import holidays
+    import tweepy
+    import time
+    from os import getenv
 
     # Obtener keys, codes y header para Estadísticas BCRA
 
