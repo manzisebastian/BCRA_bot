@@ -180,26 +180,32 @@ def tweet_info(_context):
     else:
         tweepy_api.create_tweet(text=text_componentes_BM)
         time.sleep(2)
-        if pd.to_datetime(p_variables['Fecha'][17], dayfirst=True).weekday() == 4:
+        if df["fecha"][df[15].last_valid_index()].weekday() == 4:
             tweepy_api.create_tweet(text=text_semanal_componentes_BM)
             time.sleep(2)
+
         tweepy_api.create_tweet(text=text_reservas)
         time.sleep(2)
-        if pd.to_datetime(p_variables['Fecha'][0], dayfirst=True).weekday() == 4:
+        if df["fecha"][df[1].last_valid_index()].weekday() == 4:
             tweepy_api.create_tweet(text=text_semanal_reservas)
             time.sleep(2)
+        
         tweepy_api.create_tweet(text=text_tc)
         time.sleep(2)
-        if pd.to_datetime(p_variables['Fecha'][1], dayfirst=True).weekday() == 4:
+        if df["fecha"][df[4].last_valid_index()].weekday() == 4:
             tweepy_api.create_tweet(text=text_semanal_tc)
             time.sleep(2)
+        
         tweepy_api.create_tweet(text=text_tasas_BCRA)
         time.sleep(2)
+
         tweepy_api.create_tweet(text=text_tasas_depositos)
         time.sleep(2)
+
         tweepy_api.create_tweet(text=text_depositos)
         time.sleep(2)
-        if pd.to_datetime(p_variables['Fecha'][23], dayfirst=True).weekday() == 4:
+
+        if df["fecha"][df[21].last_valid_index()].weekday() == 4:
             tweepy_api.create_tweet(text=text_semanal_depositos)
             time.sleep(2)
         tweepy_api.create_tweet(text=text_otros_indicadores)
